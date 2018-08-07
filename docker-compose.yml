@@ -3,6 +3,13 @@ version: '3.3'
 services:
   client:
     image: qbonaventure/discord-bot-ws:latest
+    secrets:
+      - source: ftcbot-broker-password
+        target: /run/secrets/ftcbot-broker-password
+        mode: 0777
+      - ftcbot-broker-username
+      - source: ftcbot-discord-auth-token
+        target: /run/secrets/ftcbot-discord-auth-token
     ports:
       - "7632:7632"
     tty: true
@@ -57,6 +64,14 @@ services:
         condition: on-failure
     networks:
       ftcbot:
+      
+secrets:
+  ftcbot-broker-password:
+    external: true
+  ftcbot-broker-username:
+    external: true
+  ftcbot-discord-auth-token:
+    external: true
       
 networks:
   ftcbot:

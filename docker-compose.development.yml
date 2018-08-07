@@ -5,6 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    secrets:
+      - ftcbot-broker-password
+      - ftcbot-broker-username
+      - ftcbot-discord-auth-token
     expose:
       - "7632"
     tty: true
@@ -34,6 +38,16 @@ services:
     networks:
       ftcbot_dev:
       
+      
+secrets:
+  ftcbot-broker-password:
+    file: /var/docker-secrets/ftcbot/dev/ftcbot-broker-password
+  ftcbot-broker-username:
+    file: /var/docker-secrets/ftcbot/dev/ftcbot-broker-username
+  ftcbot-discord-auth-token:
+    file: /var/docker-secrets/ftcbot/dev/ftcbot-discord-auth-token
+    
+    
 networks:
   ftcbot_dev:
     external: true
